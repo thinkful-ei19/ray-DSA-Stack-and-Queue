@@ -71,13 +71,19 @@ function is_palindrome(string) {
 
 function matchParenthesis(string) {
   let testStack = new Stack();
-
+  
   for(let i = 0; i < string.length; i++) {
-    if(string[i] === '(') {
-      testStack.push(i);
+    if(string[i] === '(' || string[i] === '[' || string[i] === '{') {
+      testStack.push(string[i]);
     }
-    else if(string[i] === ')') {
-      testStack.pop(i);
+    else if(testStack.top.data === '(' && string[i] === ')') {
+      testStack.pop();
+    }
+    else if(testStack.top.data === '[' && string[i] === ']') {
+      testStack.pop();
+    }
+    else if(testStack.top.data === '{' && string[i] === '}') {
+      testStack.pop();
     }
   }
   if(testStack.top !== null) {
@@ -85,6 +91,32 @@ function matchParenthesis(string) {
   }
   return true;
 }
+  
+//   let tempArray = [];
+//   for(let i = 0; i < string.length; i++) {
+//     const current = string[i];
+//     const lastChild = tempArray[tempArray.length - 1];
+//     if(current === '(' || current === '[' || current === '{') {
+//       tempArray.push(current);
+//       console.log(tempArray);
+//     }
+//     if(current === ')' || current === ']' || current === '}') {
+//       if(lastChild === '(' || current === ')') {
+//         tempArray.pop();
+//       }
+//       if(lastChild === '[' || current === ']') {
+//         tempArray.pop();
+//       }
+//       if(lastChild === '{' || current === '}') {
+//         tempArray.pop();
+//       }
+//     }
+//   }
+//   if(tempArray.length > 0) {
+//     // console.log(tempArray);
+//     return false;
+//   }
+//   return true;
 
 
 //================================================================
@@ -98,7 +130,7 @@ function main() {
 //   console.log(peek(starTrek));
 //   console.log(display(starTrek));
 //   console.log(is_palindrome('A man, a plan, a canal: Panama'));
-  console.log(matchParenthesis('((1 + 1) + (2 + 2) + (3 + 3))'));
+  console.log(matchParenthesis('((1 + 1) + (2 + 2))'));
 }
 
 main();
