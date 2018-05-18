@@ -124,7 +124,7 @@ function sortStack(stack) {
   
   while(stack.top) {
     let number = stack.pop();
-    while(testStack.top && peek(testStack) > number) {
+    while(testStack.top && peek(testStack) < number) {
       stack.push(testStack.pop());
     }
     testStack.push(number);
@@ -152,8 +152,6 @@ function main() {
 //   console.log(is_palindrome('A man, a plan, a canal: Panama'));
 //   console.log(matchParenthesis('((1 + 1) + (2 + 2))'));
   console.log(sortStack(starTrek));
-  
 }
-
 
 main();
