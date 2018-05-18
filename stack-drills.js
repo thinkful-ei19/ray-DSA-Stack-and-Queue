@@ -26,3 +26,41 @@ class Stack {
     return node.data;
   }
 }
+
+
+function peek(stack) {
+  let currNode = stack.top;
+  let displayNode = currNode.data.toString();
+  if(currNode === null) {
+    throw new Error('Stack is empty');
+  }
+  return displayNode;
+}
+
+
+function display(stack) {
+  let currNode = stack.top;
+  let displayStack = currNode.data.toString();
+  while(currNode.next !== null) {
+    displayStack += ', ' + currNode.next.data.toString();
+    currNode = currNode.next;
+  }
+  if(currNode === null) {
+    throw new Error('Stack is empty');
+  }
+  return displayStack;
+}
+
+//================================================================
+function main() {
+  let starTrek = new Stack();
+  starTrek.push('Kirk');
+  starTrek.push('Spock');
+  starTrek.push('McCoy');
+  starTrek.push('Scotty');
+
+//   console.log(peek(starTrek));
+  console.log(display(starTrek));
+}
+
+main();
