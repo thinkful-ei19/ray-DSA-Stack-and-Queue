@@ -28,8 +28,8 @@ class Stack {
 }
 
 
-function peek(stack) {
-  let currNode = stack.top;
+function peek(string) {
+  let currNode = string.top;
   let displayNode = currNode.data.toString();
   if(currNode === null) {
     throw new Error('Stack is empty');
@@ -38,8 +38,8 @@ function peek(stack) {
 }
 
 
-function display(stack) {
-  let currNode = stack.top;
+function display(string) {
+  let currNode = string.top;
   let displayStack = currNode.data.toString();
   while(currNode.next !== null) {
     displayStack += ', ' + currNode.next.data.toString();
@@ -51,6 +51,42 @@ function display(stack) {
   return displayStack;
 }
 
+
+function is_palindrome(string) {
+  string = string.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  let testStack = new Stack();
+  
+  for(let i = 0; i < string.length; i++) {
+    testStack.push(string[i]);
+  }
+  for(let i = 0; i < string.length; i++) {
+    let currentLetter = testStack.pop();
+    if(currentLetter !== string[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+function matchParenthesis(string) {
+  let testStack = new Stack();
+
+  for(let i = 0; i < string.length; i++) {
+    if(string[i] === '(') {
+      testStack.push(i);
+    }
+    else if(string[i] === ')') {
+      testStack.pop(i);
+    }
+  }
+  if(testStack.top !== null) {
+    return false;
+  }
+  return true;
+}
+
+
 //================================================================
 function main() {
   let starTrek = new Stack();
@@ -60,7 +96,9 @@ function main() {
   starTrek.push('Scotty');
 
 //   console.log(peek(starTrek));
-  console.log(display(starTrek));
+//   console.log(display(starTrek));
+//   console.log(is_palindrome('A man, a plan, a canal: Panama'));
+  console.log(matchParenthesis('((1 + 1) + (2 + 2) + (3 + 3))'));
 }
 
 main();
