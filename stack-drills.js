@@ -30,7 +30,7 @@ class Stack {
 
 function peek(string) {
   let currNode = string.top;
-  let displayNode = currNode.data.toString();
+  let displayNode = currNode.data;
   if(currNode === null) {
     throw new Error('Stack is empty');
   }
@@ -119,18 +119,41 @@ function matchParenthesis(string) {
 //   return true;
 
 
+function sortStack(stack) {
+  let testStack = new Stack();
+  
+  while(stack.top) {
+    let number = stack.pop();
+    while(testStack.top && peek(testStack) > number) {
+      stack.push(testStack.pop());
+    }
+    testStack.push(number);
+  }
+  return testStack;
+}
+
+
 //================================================================
 function main() {
   let starTrek = new Stack();
-  starTrek.push('Kirk');
-  starTrek.push('Spock');
-  starTrek.push('McCoy');
-  starTrek.push('Scotty');
+//   starTrek.push('Kirk');
+//   starTrek.push('Spock');
+//   starTrek.push('McCoy');
+//   starTrek.push('Scotty');
 
+  starTrek.push(3);
+  starTrek.push(6);
+  starTrek.push(2);
+  starTrek.push(1);
+  starTrek.push(33);
+  starTrek.push(23);
 //   console.log(peek(starTrek));
 //   console.log(display(starTrek));
 //   console.log(is_palindrome('A man, a plan, a canal: Panama'));
-  console.log(matchParenthesis('((1 + 1) + (2 + 2))'));
+//   console.log(matchParenthesis('((1 + 1) + (2 + 2))'));
+  console.log(sortStack(starTrek));
+  
 }
+
 
 main();

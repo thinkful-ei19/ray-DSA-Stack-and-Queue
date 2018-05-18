@@ -43,3 +43,28 @@ class Queue {
     return node.value;
   }
 }
+
+
+function peek(queue) {
+  let currNode = queue.first;
+  let displayNode = currNode.value;
+  if(currNode === null) {
+    throw new Error('Queue is empty');
+  }
+  return displayNode;
+}
+
+
+//================================================================
+function main() {
+  let starTrekQ = new Queue();
+  starTrekQ.enqueue('Kirk');
+  starTrekQ.enqueue('Spock');
+  starTrekQ.enqueue('Uhura');
+  starTrekQ.enqueue('Sulu');
+  starTrekQ.enqueue('Checkov');
+
+  console.log(peek(starTrekQ));
+}
+
+main();
